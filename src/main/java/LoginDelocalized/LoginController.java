@@ -3,30 +3,32 @@ package LoginDelocalized;
 public class LoginController {
 
     private AuthenticationService authenticationService;
+    private UserRepository userRepository;
 
-    public LoginController(AuthenticationService authenticationService) {
+    public LoginController(AuthenticationService authenticationService, UserRepository userRepository) {
         this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
     public boolean authenticateUser(String username, String password) {
-        User user = new User(username, password);
-        boolean isAuthenticated = authenticationService.authenticate(user, username, password);
-        if (isAuthenticated) {
-            System.out.println("User " + username + " authenticated successfully.");
+        User user = userRepository.getUserByUsername(username);
+        boolean isAuthenticated = false;
+        if (user != null) {
+            isAuthenticated = authenticationService.authenticate(user, username, password);
         } else {
-            System.out.println("Authentication failed for user " + username);
+            System.out.println("User does not exist.");
         }
         return isAuthenticated;
     }
 
-    public User createUser(String username, String password) {
+    public void createUser(String username, String password) {
         User newUser = authenticationService.createUser(username, password);
-        if (newUser != null) {
-            System.out.println("User " + username + " created successfully.");
-        } else {
-            System.out.println("User " + username + " already exists.");
-        }
-        return newUser;
+        userRepository.addUser(newUser);
+    }
+
+    public void changePassword(String username, String oldPassword, String newPassword) {
+        User user = userRepository.getUserByUsername(username);
+        authenticationService.changePassword(user, oldPassword, newPassword);
     }
 
 }

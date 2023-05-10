@@ -15,17 +15,17 @@ public class AuthenticationService {
         return user;
     }
 
-    public User changePassword(User user, String newPassword) {
-        if (newPassword == null || newPassword.isEmpty() || newPassword.trim().isEmpty()) {
-            System.out.println("Please provide valid Username");
+    public void changePassword(User user, String oldPassword, String newPassword) {
+        if (authenticate(user, user.getName(), oldPassword)) {
+            user.setPassword(newPassword);
+            System.out.println("Password changed successfully");
         } else {
-            user.setName(newPassword);
+            System.out.println("Old password does not match");
         }
-        return user;
     }
 
     public boolean authenticate(User user, String password, String username) {
-        return  user.getName() == username && user.getPassword() == password;
+        return user.getPassword() == password && user.getName() == username;
     }
 
 

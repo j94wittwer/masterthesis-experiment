@@ -11,7 +11,7 @@ public class LoginControllerTest {
         String username = "alice";
         String password = "MyS4feP4ssw0rd";
 
-        LoginController loginController = new LoginController(new AuthenticationService());
+        LoginController loginController = new LoginController(new AuthenticationService(), new UserRepository());
 
         assertTrue(loginController.authenticateUser(username, password));
 
