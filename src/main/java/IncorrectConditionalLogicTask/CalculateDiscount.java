@@ -22,6 +22,21 @@ public class CalculateDiscount {
 
     public double calculateDiscount(List<Integer> items, Customer customer) {
 
+        double discountRate;
+
+        if (customer.isLoyaltyMember() && customer.getAge() > 50) { // should be >= 50
+            discountRate = 0.2;
+        } else if (customer.isLoyaltyMember() || customer.getAge() > 50) {
+            discountRate = 0.1;
+        } else {
+            discountRate = 0.05;
+        }
+        double discountAmount = 0;
+        for (int item : items) {
+            double itemDiscount = item * discountRate;
+            discountAmount += itemDiscount;
+        }
+        return discountRate;
     }
 
 }
