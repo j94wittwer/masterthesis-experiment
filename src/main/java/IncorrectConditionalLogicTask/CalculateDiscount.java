@@ -24,7 +24,7 @@ public class CalculateDiscount {
 
         double discountRate;
 
-        if (customer.isLoyaltyMember() && customer.getAge() > 50) { // should be >= 50
+        if (customer.isLoyaltyMember() && customer.getAge() > 50) {
             discountRate = 0.2;
         } else if (customer.isLoyaltyMember() || customer.getAge() > 50) {
             discountRate = 0.1;
