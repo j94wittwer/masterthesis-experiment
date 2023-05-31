@@ -23,12 +23,8 @@ public class Chat {
 
     public List<Message> getMessages(long from, long to) {
         int size = messages.size();
-        if (from > size) {
+        if (from > size || to > size) {
             return Collections.emptyList();
-        }
-
-        if (to > size) {
-            to = size;
         }
 
         return messages.subList((int) from, (int) to);
