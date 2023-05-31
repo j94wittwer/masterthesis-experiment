@@ -10,8 +10,8 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    public List<Message> getMessagesFromChat(long chatId) {
-        return chatService.getMessagesFromChat(chatId);
+    public List<Message> getMessagesFromChat(long chatId, long from, long to) {
+        return chatService.getMessagesFromChat(chatId, from, to);
     }
 
 }

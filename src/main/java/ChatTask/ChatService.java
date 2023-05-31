@@ -10,11 +10,11 @@ public class ChatService {
         this.chatRepository = chatRepository;
     }
 
-    public List<Message> getMessagesFromChat(long chatId) {
+    public List<Message> getMessagesFromChat(long chatId, long from, long to) {
         Chat chat = chatRepository.getChatById(chatId);
         if (chat == null) {
             throw new RuntimeException("Chat does not exist");
         }
-        return chat.getMessages();
+        return chat.getMessages(from, to);
     }
 }
