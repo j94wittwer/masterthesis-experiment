@@ -1,8 +1,6 @@
 package ChatTask;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Chat {
 
@@ -16,14 +14,20 @@ public class Chat {
 
     /**
      * Takes a message and pushes it to the head of the message list
+     *
      * @param message: Message
      */
     public void pushMessage(Message message) {
         messages.add(0, message);
     }
 
-    public List<Message> getMessages() {
-        return this.messages;
+    public List<Message> getMessages(long from, long to) {
+        int size = messages.size();
+        if (from > size || to > size) {
+            return Collections.emptyList();
+        }
+
+        return messages.subList((int) from, (int) to);
     }
 
     public long getId() {
